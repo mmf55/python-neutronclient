@@ -30,7 +30,7 @@ def add_known_arguments(parser):
         help=_('Segment \'extsegment\' for this extink to be attached.'))
 
 
-def args2body(parsed_args):
+def args2body(self, parsed_args):
     body = {'type': parsed_args.type,
             'extsegment': parsed_args.csegment}
     return {'extlink': body}
@@ -57,7 +57,7 @@ class ExtLinkUpdate(extension.ClientExtensionUpdate, ExtLink):
         self.add_known_arguments(parser)
 
     def args2body(self, parsed_args):
-        args2body(parsed_args)
+        args2body(self, parsed_args)
 
 
 class CLinkList(extension.ClientExtensionList, ExtLink):

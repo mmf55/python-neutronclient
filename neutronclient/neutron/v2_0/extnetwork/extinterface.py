@@ -13,7 +13,7 @@ class ExtInterface(extension.NeutronClientExtension):
     versions = ['2.0']
 
 
-def args2body(parsed_args):
+def args2body(self, parsed_args):
     body = {'type': parsed_args.type,
             'extnode_id': parsed_args.extnode_id,
             'tenant_id': parsed_args.tenant_id,
@@ -44,7 +44,7 @@ class CPortCreate(extension.ClientExtensionCreate, ExtInterface):
             help=_('Tenant network ID for which the port will be attached.'))
 
     def args2body(self, parsed_args):
-        args2body(parsed_args)
+        args2body(self, parsed_args)
 
 
 class CPortDelete(extension.ClientExtensionDelete, ExtInterface):
