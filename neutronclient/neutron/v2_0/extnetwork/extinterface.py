@@ -75,7 +75,7 @@ class CPortUpdate(extension.ClientExtensionUpdate, ExtInterface):
             help=_('Tenant network ID for which the port will be attached.'))
 
     def args2body(self, parsed_args):
-        args2body(parsed_args)
+        args2body(self, parsed_args)
 
 
 class ExtInterfacesList(extension.ClientExtensionList, ExtInterface):
