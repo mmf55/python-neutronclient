@@ -13,7 +13,7 @@ class ExtInterface(extension.NeutronClientExtension):
     versions = ['2.0']
 
 
-def args2body(self, parsed_args):
+def args2body(parsed_args):
     body = {'type': parsed_args.type,
             'extnode_id': parsed_args.extnode_id,
             'tenant_id': parsed_args.tenant_id,

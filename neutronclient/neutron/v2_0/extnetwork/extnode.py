@@ -14,7 +14,7 @@ class ExtNode(extension.NeutronClientExtension):
     versions = ['2.0']
 
 
-def add_know_arguments(self, parser):
+def add_know_arguments(parser):
     parser.add_argument(
         '--extsegments',
         metavar='name=name,segments=SEGMENTS_CONNECTED',
@@ -23,7 +23,7 @@ def add_know_arguments(self, parser):
     )
 
 
-def args2body(self, parsed_args):
+def args2body(parsed_args):
     body = {'name': parsed_args.name,
             'type': parsed_args.type}
     if parsed_args.segments:

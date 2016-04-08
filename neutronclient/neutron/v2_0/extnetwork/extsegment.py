@@ -13,7 +13,7 @@ class ExtSegment(extension.NeutronClientExtension):
     versions = ['2.0']
 
 
-def args2body(self, parsed_args):
+def args2body(parsed_args):
     body = {'types-supported': parsed_args.types_supported,
             'nodes-connected': parsed_args.nodes_connected}
     return {'extsegment': body}

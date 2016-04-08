@@ -12,7 +12,7 @@ class ExtLink(extension.NeutronClientExtension):
     versions = ['2.0']
 
 
-def add_known_arguments(self, parser):
+def add_known_arguments(parser):
     parser.add_argument(
         '--type', dest='type',
         help=_('Type of overlay network that this clink implements.'))
@@ -30,7 +30,7 @@ def add_known_arguments(self, parser):
         help=_('Segment \'extsegment\' for this extink to be attached.'))
 
 
-def args2body(self, parsed_args):
+def args2body(parsed_args):
     body = {'type': parsed_args.type,
             'extsegment': parsed_args.csegment}
     return {'extlink': body}
