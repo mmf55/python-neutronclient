@@ -23,7 +23,7 @@ def add_know_arguments(parser):
     )
 
 
-def args2body(parsed_args):
+def args2body(self, parsed_args):
     body = {'name': parsed_args.name,
             'type': parsed_args.type}
     if parsed_args.segments:
@@ -47,7 +47,7 @@ class ExtNodeCreate(extension.ClientExtensionCreate, ExtNode):
             help=_('External node type. E.g. router, switch, ap.'))
 
     def args2body(self, parsed_args):
-        return args2body(parsed_args)
+        return args2body(self, parsed_args)
 
 
 class CNodeDelete(extension.ClientExtensionDelete, ExtNode):
