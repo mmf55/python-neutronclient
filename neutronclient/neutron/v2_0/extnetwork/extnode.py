@@ -16,9 +16,9 @@ class ExtNode(extension.NeutronClientExtension):
 
 def add_know_arguments(self, parser):
     parser.add_argument(
-        '--segments',
+        '--extsegments',
         metavar='name=name,segments=SEGMENTS_CONNECTED',
-        action='append', dest='devices', type=utils.str2dict,
+        action='append', dest='segments', type=utils.str2dict,
         help=_('(Optional) Segments where this node has interfaces. ')
     )
 
