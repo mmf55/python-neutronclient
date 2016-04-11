@@ -1,4 +1,3 @@
-
 from neutronclient._i18n import _
 from neutronclient.common import extension
 
@@ -13,6 +12,24 @@ class ExtInterface(extension.NeutronClientExtension):
     versions = ['2.0']
 
 
+def add_known_arguments(self, parser):
+    parser.add_argument(
+        '--type',
+        help=_('Type of CPort (eg.: SSID, physical port.)'))
+
+    parser.add_argument(
+        '--cnode-id',
+        help=_('CSegment for this CLink to be attached.'))
+
+    parser.add_argument(
+        '--tenant-id',
+        help=_('Tenant ID for which the port will belong.'))
+
+    parser.add_argument(
+        '--tenant-network',
+        help=_('Tenant network ID for which the port will be attached.'))
+
+
 def args2body(self, parsed_args):
     body = {'type': parsed_args.type,
             'extnode_id': parsed_args.extnode_id,
@@ -22,57 +39,24 @@ def args2body(self, parsed_args):
 
 
 class CPortCreate(extension.ClientExtensionCreate, ExtInterface):
-
     shell_command = 'extinterface-create'
 
     def add_known_arguments(self, parser):
-
-        parser.add_argument(
-            '--type', dest='type',
-            help=_('Type of extinterface (eg.: SSID, physical port.)'))
-
-        parser.add_argument(
-            '--extnode-id', dest='extnode_id',
-            help=_('CSegment for this CLink to be attached.'))
-
-        parser.add_argument(
-            '--tenant-id', dest='tenant_id',
-            help=_('Tenant ID for which the port will belong.'))
-
-        parser.add_argument(
-            '--tenant-network', dest='tenant_network',
-            help=_('Tenant network ID for which the port will be attached.'))
+        add_known_arguments(self, parser)
 
     def args2body(self, parsed_args):
         args2body(self, parsed_args)
 
 
 class CPortDelete(extension.ClientExtensionDelete, ExtInterface):
-
     shell_command = 'extinterface-delete'
 
 
 class CPortUpdate(extension.ClientExtensionUpdate, ExtInterface):
-
     shell_command = 'extinterface-update'
 
     def add_known_arguments(self, parser):
-
-        parser.add_argument(
-            '--type',
-            help=_('Type of CPort (eg.: SSID, physical port.)'))
-
-        parser.add_argument(
-            '--cnode-id',
-            help=_('CSegment for this CLink to be attached.'))
-
-        parser.add_argument(
-            '--tenant-id',
-            help=_('Tenant ID for which the port will belong.'))
-
-        parser.add_argument(
-            '--tenant-network',
-            help=_('Tenant network ID for which the port will be attached.'))
+        add_known_arguments(self, parser)
 
     def args2body(self, parsed_args):
         args2body(self, parsed_args)
@@ -88,6 +72,4 @@ class ExtInterfacesList(extension.ClientExtensionList, ExtInterface):
 
 
 class ExtInterfaceShow(extension.ClientExtensionShow, ExtInterface):
-
     shell_command = 'extinterface-show'
-

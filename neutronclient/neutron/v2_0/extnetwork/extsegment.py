@@ -13,6 +13,20 @@ class ExtSegment(extension.NeutronClientExtension):
     versions = ['2.0']
 
 
+def add_know_arguments(self, parser):
+    parser.add_argument(
+        '--name', dest='name',
+        help=_('Name of the segment.'))
+
+    parser.add_argument(
+        '--types-supported', dest='types_supported',
+        help=_('Types of overlay networks that this extsegment supports.'))
+
+    parser.add_argument(
+        '--ids-pool', dest='ids_pool',
+        help=_('Pool of IDs available to use in the segment. (xxxx:xxxx)'))
+
+
 def args2body(self, parsed_args):
     body = {'name': parsed_args.name,
             'types-supported': parsed_args.types_supported,
@@ -26,18 +40,7 @@ class ExtSegmentCreate(extension.ClientExtensionCreate, ExtSegment):
     list_columns = ['id', 'types_supported', 'ids_pool']
 
     def add_known_arguments(self, parser):
-
-        parser.add_argument(
-            '--name', dest='name',
-            help=_('Name of the segment.'))
-
-        parser.add_argument(
-            '--types-supported', dest='types_supported',
-            help=_('Types of overlay networks that this extsegment supports.'))
-
-        parser.add_argument(
-            '--ids-pool', dest='ids_pool',
-            help=_('Pool of IDs available to use in the segment.'))
+        add_know_arguments(self, parser)
 
     def args2body(self, parsed_args):
         return args2body(self, parsed_args)
@@ -54,18 +57,7 @@ class ExtSegmentUpdate(extension.ClientExtensionUpdate, ExtSegment):
     list_columns = ['id', 'types_supported', 'nodes_connected']
 
     def add_known_arguments(self, parser):
-
-        parser.add_argument(
-            '--name', dest='name',
-            help=_('Name of the segment.'))
-
-        parser.add_argument(
-            '--types-supported', dest='types_supported',
-            help=_('Types of overlay networks that this extsegment supports.'))
-
-        parser.add_argument(
-            '--ids-pool', dest='ids-pool',
-            help=_('Pool of IDs available to use in the segment. (xxxx:xxxx)'))
+        add_know_arguments(self, parser)
 
     def args2body(self, parsed_args):
         return args2body(parsed_args)

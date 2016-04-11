@@ -16,10 +16,17 @@ class ExtNode(extension.NeutronClientExtension):
 
 def add_know_arguments(self, parser):
     parser.add_argument(
+        '--name', dest='name',
+        help=_('Name of this extnode.'))
+
+    parser.add_argument(
+        '--type', dest='type',
+        help=_('External node type. E.g. router, switch, ap.'))
+
+    parser.add_argument(
         '--extsegment',
-        action='append', dest='segments', type=utils.str2dict,
-        help=_('(Optional) Segments where this node has interfaces. ')
-    )
+        action='append', dest='segments',
+        help=_('(Optional) Segments where this node has interfaces. '))
 
 
 def args2body(self, parsed_args):
@@ -36,15 +43,6 @@ class ExtNodeCreate(extension.ClientExtensionCreate, ExtNode):
     shell_command = 'extnode-create'
 
     def add_known_arguments(self, parser):
-
-        parser.add_argument(
-            '--name', dest='name',
-            help=_('Name of this extnode.'))
-
-        parser.add_argument(
-            '--type', dest='type',
-            help=_('External node type. E.g. router, switch, ap.'))
-
         add_know_arguments(self, parser)
 
     def args2body(self, parsed_args):
@@ -62,15 +60,6 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
     list_columns = ['id', 'name', 'ip_address']
 
     def add_known_arguments(self, parser):
-
-        parser.add_argument(
-            '--name', dest='name',
-            help=_('Name of this extnode.'))
-
-        parser.add_argument(
-            '--type', dest='type',
-            help=_('External node type. E.g. router, switch, ap.'))
-
         add_know_arguments(self, parser)
 
     def args2body(self, parsed_args):

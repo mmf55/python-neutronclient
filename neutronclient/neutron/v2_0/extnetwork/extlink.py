@@ -40,7 +40,7 @@ class ExtLinkCreate(extension.ClientExtensionCreate, ExtLink):
     shell_command = 'extlink-create'
 
     def add_known_arguments(self, parser):
-        self.add_known_arguments(parser)
+        add_known_arguments(parser)
 
     def args2body(self, parsed_args):
         return args2body(self, parsed_args)
@@ -54,7 +54,7 @@ class ExtLinkUpdate(extension.ClientExtensionUpdate, ExtLink):
     shell_command = 'extlink-update'
 
     def add_known_arguments(self, parser):
-        self.add_known_arguments(parser)
+        add_known_arguments(parser)
 
     def args2body(self, parsed_args):
         args2body(self, parsed_args)
