@@ -16,8 +16,7 @@ class ExtNode(extension.NeutronClientExtension):
 
 def add_know_arguments(self, parser):
     parser.add_argument(
-        '--extsegments',
-        metavar='name=name,segments=SEGMENTS_CONNECTED',
+        '--extsegment',
         action='append', dest='segments', type=utils.str2dict,
         help=_('(Optional) Segments where this node has interfaces. ')
     )
@@ -91,11 +90,3 @@ class ExtNodeShow(extension.ClientExtensionShow, ExtNode):
     shell_command = 'extnode-show'
 
 
-class CNodeAttach(ExtNode):
-    # Attach CNode to a CSegment.
-    pass
-
-
-class CNodeDetach(ExtNode):
-    # Detach CNode from a CSegment.
-    pass
