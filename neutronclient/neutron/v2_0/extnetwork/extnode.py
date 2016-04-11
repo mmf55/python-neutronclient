@@ -39,7 +39,7 @@ class ExtNodeCreate(extension.ClientExtensionCreate, ExtNode):
 
         parser.add_argument(
             '--name', dest='name',
-            help=_('Name of this extode.'))
+            help=_('Name of this extnode.'))
 
         parser.add_argument(
             '--type', dest='type',

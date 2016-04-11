@@ -14,8 +14,9 @@ class ExtSegment(extension.NeutronClientExtension):
 
 
 def args2body(self, parsed_args):
-    body = {'types-supported': parsed_args.types_supported,
-            'nodes-connected': parsed_args.nodes_connected}
+    body = {'name': parsed_args.name,
+            'types-supported': parsed_args.types_supported,
+            'ids_pool': parsed_args.nodes_connected}
     return {'extsegment': body}
 
 
@@ -27,11 +28,15 @@ class ExtSegmentCreate(extension.ClientExtensionCreate, ExtSegment):
     def add_known_arguments(self, parser):
 
         parser.add_argument(
+            '--name', dest='name',
+            help=_('Name of the segment.'))
+
+        parser.add_argument(
             '--types-supported', dest='types_supported',
             help=_('Types of overlay networks that this extsegment supports.'))
 
         parser.add_argument(
-            '--ids-pool', dest='ids-pool',
+            '--ids-pool', dest='ids_pool',
             help=_('Pool of IDs available to use in the segment.'))
 
     def args2body(self, parsed_args):
@@ -51,12 +56,16 @@ class ExtSegmentUpdate(extension.ClientExtensionUpdate, ExtSegment):
     def add_known_arguments(self, parser):
 
         parser.add_argument(
+            '--name', dest='name',
+            help=_('Name of the segment.'))
+
+        parser.add_argument(
             '--types-supported', dest='types_supported',
             help=_('Types of overlay networks that this extsegment supports.'))
 
         parser.add_argument(
             '--ids-pool', dest='ids-pool',
-            help=_('Pool of IDs available to use in the segment.'))
+            help=_('Pool of IDs available to use in the segment. (xxxx:xxxx)'))
 
     def args2body(self, parsed_args):
         return args2body(parsed_args)
