@@ -24,8 +24,7 @@ def add_know_arguments(self, parser):
         help=_('External node type. E.g. router, switch, ap.'))
 
     parser.add_argument(
-        '--extsegment',
-        action='append', dest='segments',
+        '--extsegment', dest='segments',
         help=_('(Optional) Segments where this node has interfaces. '))
 
 
