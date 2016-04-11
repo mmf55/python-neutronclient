@@ -1,4 +1,3 @@
-
 from neutronclient._i18n import _
 from neutronclient.common import extension
 
@@ -24,13 +23,13 @@ def add_know_arguments(self, parser):
 
     parser.add_argument(
         '--ids-pool', dest='ids_pool',
-        help=_('Pool of IDs available to use in the segment. (xxxx:xxxx)'))
+        help=_('Pool of IDs available to use in the segment. (xxxx:xxxx or xxxxx)'))
 
 
 def args2body(self, parsed_args):
     body = {'name': parsed_args.name,
-            'types-supported': parsed_args.types_supported,
-            'ids_pool': parsed_args.nodes_connected}
+            'types_supported': parsed_args.types_supported,
+            'ids_pool': parsed_args.ids_pool}
     return {'extsegment': body}
 
 

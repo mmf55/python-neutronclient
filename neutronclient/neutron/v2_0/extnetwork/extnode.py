@@ -23,16 +23,16 @@ def add_know_arguments(self, parser):
         '--type', dest='type',
         help=_('External node type. E.g. router, switch, ap.'))
 
-    parser.add_argument(
-        '--extsegment', dest='segments',
-        help=_('(Optional) Segments where this node has interfaces. '))
+    # parser.add_argument(
+    #     '--extsegments', dest='extsegments',
+    #     help=_('Segments where this node has interfaces. '))
 
 
 def args2body(self, parsed_args):
     body = {'name': parsed_args.name,
             'type': parsed_args.type}
-    if parsed_args.segments:
-        body['segments'] = parsed_args.segments
+    if 'extsegments' in parsed_args:
+        body['extsegments'] = parsed_args.extsegments
 
     return {'extnode': body}
 
