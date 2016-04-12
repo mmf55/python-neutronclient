@@ -71,7 +71,7 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
         add_know_arguments(self, parser)
 
         parser.add_argument(
-            '--remove-interface', metavar='ID',
+            '--remove-interfaces', metavar='ID',
             dest='rem_interfaces',
             help=_('Remove the interface from the network management. '))
 
