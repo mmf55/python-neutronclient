@@ -37,9 +37,13 @@ def args2body(self, parsed_args):
     body = {'name': parsed_args.name,
             'type': parsed_args.type}
     if 'add_interfaces' in parsed_args:
-        body['add_interfaces'] = parsed_args.interfaces
+        body['add_interfaces'] = parsed_args.add_interfaces
     else:
-        body['add_interfaces'] = 'no_interfaces'
+        body['add_interfaces'] = None
+    if 'rem_interfaces' in parsed_args:
+        body['rem_interfaces'] = parsed_args.rem_interfaces
+    else:
+        body['rem_interfaces'] = None
     return {'extnode': body}
 
 
@@ -66,6 +70,11 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
     def add_known_arguments(self, parser):
         add_know_arguments(self, parser)
 
+        parser.add_argument(
+            '--remove-interface', metavar='ID',
+            dest='rem_interfaces',
+            help=_('Remove the interface from the network management. '))
+
     def args2body(self, parsed_args):
         return args2body(self, parsed_args)
 
@@ -73,7 +82,7 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
 class ExtNodeList(extension.ClientExtensionList, ExtNode):
 
     shell_command = 'extnode-list'
-    list_columns = ['id', 'name', 'type']
+    list_columns = ['id', 'name', 'type', 'interfaces']
     pagination_support = True
     sorting_support = True
 
