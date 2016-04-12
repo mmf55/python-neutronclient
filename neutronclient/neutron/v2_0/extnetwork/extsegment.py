@@ -51,12 +51,12 @@ class ExtSegmentCreate(extension.ClientExtensionCreate, ExtSegment):
 
 class ExtSegmentDelete(extension.ClientExtensionDelete, ExtSegment):
 
-    shell_command = 'csegment-delete'
+    shell_command = 'extsegment-delete'
 
 
 class ExtSegmentUpdate(extension.ClientExtensionUpdate, ExtSegment):
 
-    shell_command = 'csegment-update'
+    shell_command = 'extsegment-update'
     list_columns = ['id', 'types_supported', 'nodes_connected']
 
     def add_known_arguments(self, parser):
