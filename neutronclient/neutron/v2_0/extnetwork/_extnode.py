@@ -31,8 +31,8 @@ def add_know_arguments(self, parser):
 def args2body(self, parsed_args):
     body = {'name': parsed_args.name,
             'type': parsed_args.type}
-    if 'addinterface' in parsed_args:
-        body['interfaces'] = parsed_args.addinterface
+    if 'extsegments' in parsed_args:
+        body['extsegments'] = parsed_args.extsegments
 
     return {'extnode': body}
 
