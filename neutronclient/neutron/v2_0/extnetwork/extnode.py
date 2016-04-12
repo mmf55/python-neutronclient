@@ -71,9 +71,11 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
         add_know_arguments(self, parser)
 
         parser.add_argument(
-            '--remove-interfaces', metavar='ID',
-            dest='rem_interfaces',
-            help=_('Remove the interface from the network management. '))
+            '--remove-interface', metavar='id=id',
+            action='append',
+            default=argparse.SUPPRESS,
+            dest='rem_interfaces', type=utils.str2dict,
+            help=_('Remove interfaces from the Neutron External network management. '))
 
     def args2body(self, parsed_args):
         return args2body(self, parsed_args)
