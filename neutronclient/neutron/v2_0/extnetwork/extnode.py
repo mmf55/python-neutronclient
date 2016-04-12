@@ -1,3 +1,4 @@
+import argparse
 
 from neutronclient._i18n import _
 from neutronclient.common import extension
@@ -23,17 +24,22 @@ def add_know_arguments(self, parser):
         '--type', dest='type',
         help=_('External node type. E.g. router, switch, ap.'))
 
-    # parser.add_argument(
-    #     '--extsegments', dest='extsegments',
-    #     help=_('Segments where this node has interfaces. '))
+    parser.add_argument(
+        '--add-interface',
+        metavar='name=name,type=type,segment=segment',
+        action='append',
+        default=argparse.SUPPRESS,
+        dest='add_interfaces', type=utils.str2dict,
+        help=_('Segments where this node has interfaces. '))
 
 
 def args2body(self, parsed_args):
     body = {'name': parsed_args.name,
             'type': parsed_args.type}
-    if 'addinterface' in parsed_args:
-        body['interfaces'] = parsed_args.addinterface
-
+    if 'add_interfaces' in parsed_args:
+        body['add_interfaces'] = parsed_args.interfaces
+    else:
+        body['add_interfaces'] = 'no_interfaces'
     return {'extnode': body}
 
 
@@ -56,7 +62,6 @@ class ExtNodeDelete(extension.ClientExtensionDelete, ExtNode):
 class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
 
     shell_command = 'extnode-update'
-    list_columns = ['id', 'name', 'ip_address']
 
     def add_known_arguments(self, parser):
         add_know_arguments(self, parser)

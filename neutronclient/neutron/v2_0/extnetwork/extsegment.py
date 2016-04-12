@@ -1,6 +1,10 @@
 from neutronclient._i18n import _
 from neutronclient.common import extension
 
+from oslo_log import log as logging
+
+LOG = logging.getLogger(__name__)
+
 
 class ExtSegment(extension.NeutronClientExtension):
     """Define required variables for resource operations."""
