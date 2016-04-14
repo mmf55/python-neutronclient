@@ -71,6 +71,10 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
         add_know_arguments(self, parser)
 
         parser.add_argument(
+            '--id', dest='id',
+            help=_('Name of this extnode.'))
+
+        parser.add_argument(
             '--remove-interface', metavar='id=id',
             action='append',
             default=argparse.SUPPRESS,
@@ -84,7 +88,7 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
 class ExtNodeList(extension.ClientExtensionList, ExtNode):
 
     shell_command = 'extnode-list'
-    list_columns = ['id', 'name', 'type', 'interfaces']
+    list_columns = ['id', 'name', 'type']
     pagination_support = True
     sorting_support = True
 

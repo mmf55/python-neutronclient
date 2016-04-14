@@ -14,7 +14,6 @@
 #    under the License.
 
 import netaddr
-import re
 
 from neutronclient._i18n import _
 from neutronclient.common import exceptions
@@ -68,10 +67,3 @@ def validate_ip_subnet(parsed_args, attr_name):
         raise exceptions.CommandError(
             (_('%(attr_name)s "%(val)s" is not a valid CIDR.') %
              {'attr_name': attr_name.replace('_', '-'), 'val': val}))
-
-
-def validate_ids_pool(ids_pool):
-    r1 = re.compile('[0-9]*:[0-9]*')
-    r2 = re.compile('[0-9]*')
-    if r1.match(ids_pool) is not None or r2.match(ids_pool) is not None:
-        raise exceptions.CommandError(_('The format of the pool os IDs is not correct.'))
