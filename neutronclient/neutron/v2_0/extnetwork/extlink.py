@@ -26,7 +26,7 @@ def add_known_arguments(parser):
         help=_('Physical network ID that this link will use.'))
 
     parser.add_argument(
-        '--extsegment', dest='extsegment',
+        '--extsegment-id', dest='extsegment_id',
         help=_('Segment \'extsegment\' for this extink to be attached.'))
 
 

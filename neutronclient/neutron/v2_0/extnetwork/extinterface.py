@@ -14,25 +14,25 @@ class ExtInterface(extension.NeutronClientExtension):
 
 def add_known_arguments(self, parser):
     parser.add_argument(
-        '--type',
+        '--type', dest='type',
         help=_('Type of CPort (eg.: SSID, physical port.)'))
 
     parser.add_argument(
-        '--cnode-id',
-        help=_('CSegment for this CLink to be attached.'))
+        '--extnodeint-id', dest='extnodeint_id',
+        help=_('Extsegment for this Extlink to be attached.'))
 
     parser.add_argument(
-        '--tenant-id',
+        '--tenant-id', dest='tenant_id',
         help=_('Tenant ID for which the port will belong.'))
 
     parser.add_argument(
-        '--tenant-network',
+        '--tenant-network', dest='tenant_network',
         help=_('Tenant network ID for which the port will be attached.'))
 
 
 def args2body(self, parsed_args):
     body = {'type': parsed_args.type,
-            'extnode_id': parsed_args.extnode_id,
+            'extnodeint_id': parsed_args.extnode_id,
             'tenant_id': parsed_args.tenant_id,
             'tenant_network': parsed_args.tenant_network}
     return {'extinterface': body}
