@@ -40,7 +40,7 @@ def args2body(self, parsed_args):
 class ExtSegmentCreate(extension.ClientExtensionCreate, ExtSegment):
 
     shell_command = 'extsegment-create'
-    list_columns = ['id', 'types_supported', 'ids_pool']
+    list_columns = ['id', 'name', 'types_supported', 'ids_pool']
 
     def add_known_arguments(self, parser):
         add_know_arguments(self, parser)
@@ -57,7 +57,7 @@ class ExtSegmentDelete(extension.ClientExtensionDelete, ExtSegment):
 class ExtSegmentUpdate(extension.ClientExtensionUpdate, ExtSegment):
 
     shell_command = 'extsegment-update'
-    list_columns = ['id', 'types_supported', 'nodes_connected']
+    list_columns = ['id', 'name', 'types_supported', 'ids_pool']
 
     def add_known_arguments(self, parser):
         add_know_arguments(self, parser)
@@ -69,7 +69,7 @@ class ExtSegmentUpdate(extension.ClientExtensionUpdate, ExtSegment):
 class ExtSegmentList(extension.ClientExtensionList, ExtSegment):
 
     shell_command = 'extsegment-list'
-    list_columns = ['id', 'types_supported', 'ids_pool']
+    list_columns = ['id', 'name', 'types_supported', 'ids_pool']
     pagination_support = True
     sorting_support = True
 

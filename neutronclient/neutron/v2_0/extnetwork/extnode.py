@@ -48,8 +48,9 @@ def args2body(self, parsed_args):
 
 
 class ExtNodeCreate(extension.ClientExtensionCreate, ExtNode):
-
     shell_command = 'extnode-create'
+
+    list_columns = ['id', 'name', 'type', 'interfaces']
 
     def add_known_arguments(self, parser):
         add_know_arguments(self, parser)
@@ -64,15 +65,12 @@ class ExtNodeDelete(extension.ClientExtensionDelete, ExtNode):
 
 
 class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
-
     shell_command = 'extnode-update'
+
+    list_columns = ['id', 'name', 'type', 'interfaces']
 
     def add_known_arguments(self, parser):
         add_know_arguments(self, parser)
-
-        parser.add_argument(
-            '--id', dest='id',
-            help=_('Name of this extnode.'))
 
         parser.add_argument(
             '--remove-interface', metavar='id=id',
@@ -88,7 +86,7 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
 class ExtNodeList(extension.ClientExtensionList, ExtNode):
 
     shell_command = 'extnode-list'
-    list_columns = ['id', 'name', 'type']
+    list_columns = ['id', 'name', 'type', 'interfaces']
     pagination_support = True
     sorting_support = True
 

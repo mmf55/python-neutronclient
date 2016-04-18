@@ -1,3 +1,5 @@
+import argparse
+
 from neutronclient._i18n import _
 from neutronclient.common import extension
 
@@ -13,33 +15,33 @@ class ExtInterface(extension.NeutronClientExtension):
 
 
 def add_known_arguments(self, parser):
-    parser.add_argument(
-        '--type', dest='type',
-        help=_('Type of CPort (eg.: SSID, physical port.)'))
-
-    parser.add_argument(
-        '--extnodeint-id', dest='extnodeint_id',
-        help=_('Extsegment for this Extlink to be attached.'))
 
     parser.add_argument(
         '--tenant-id', dest='tenant_id',
-        help=_('Tenant ID for which the port will belong.'))
+        default=argparse.SUPPRESS,
+        help=_('Tenant network ID for which the interface will be attached.'))
 
     parser.add_argument(
-        '--tenant-network', dest='tenant_network',
-        help=_('Tenant network ID for which the port will be attached.'))
+        '--extnodeint-id', dest='extnodeint_id',
+        help=_('Interface of the extnode to be attached.'))
+
+    parser.add_argument(
+        '--network-id', dest='network_id',
+        help=_('Network ID of the network in the datacenter to attach this interface.'))
 
 
 def args2body(self, parsed_args):
-    body = {'type': parsed_args.type,
-            'extnodeint_id': parsed_args.extnode_id,
-            'tenant_id': parsed_args.tenant_id,
-            'tenant_network': parsed_args.tenant_network}
+    body = {'extnodeint_id': parsed_args.extnode_id,
+            'network_id': parsed_args.network_id}
+    if 'tenant_id' in parsed_args:
+        body['tenant_id'] = parsed_args.tenant_id
     return {'extinterface': body}
 
 
-class CPortCreate(extension.ClientExtensionCreate, ExtInterface):
+class ExtInterfaceCreate(extension.ClientExtensionCreate, ExtInterface):
     shell_command = 'extinterface-create'
+
+    list_columns = ['id', 'tenant_id', 'extnodeint_id', 'network_id']
 
     def add_known_arguments(self, parser):
         add_known_arguments(self, parser)
@@ -48,12 +50,14 @@ class CPortCreate(extension.ClientExtensionCreate, ExtInterface):
         args2body(self, parsed_args)
 
 
-class CPortDelete(extension.ClientExtensionDelete, ExtInterface):
+class ExtInterfaceDelete(extension.ClientExtensionDelete, ExtInterface):
     shell_command = 'extinterface-delete'
 
 
-class CPortUpdate(extension.ClientExtensionUpdate, ExtInterface):
+class ExtInterfaceUpdate(extension.ClientExtensionUpdate, ExtInterface):
     shell_command = 'extinterface-update'
+
+    list_columns = ['id', 'tenant_id', 'extnodeint_id', 'network_id']
 
     def add_known_arguments(self, parser):
         add_known_arguments(self, parser)
@@ -66,10 +70,14 @@ class ExtInterfacesList(extension.ClientExtensionList, ExtInterface):
     """List of ExtInterfaces."""
 
     shell_command = 'extinterface-list'
+
     list_columns = ['id', 'type', 'extnode_id', 'network_id']
+
     pagination_support = True
     sorting_support = True
 
 
 class ExtInterfaceShow(extension.ClientExtensionShow, ExtInterface):
     shell_command = 'extinterface-show'
+
+    list_columns = ['id', 'tenant_id', 'extnodeint_id', 'network_id']
