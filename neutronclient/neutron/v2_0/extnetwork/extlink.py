@@ -34,7 +34,7 @@ def add_known_arguments(parser):
 
     parser.add_argument(
         '--add-connection',
-        metavar='type=type,extnodeint1_id=extnodeint1,extnodeint2_id=extnodeint2,extlink=extlink',
+        metavar='type=type,extnodeint1=extnodeint1,extnodeint2=extnodeint2,extlink=extlink',
         action='append',
         default=argparse.SUPPRESS,
         dest='add_connections', type=utils.str2dict,
