@@ -18,7 +18,7 @@ class ExtSegment(extension.NeutronClientExtension):
 
 def add_know_arguments(self, parser):
     parser.add_argument(
-        '--name', dest='name',
+        'name', metavar='<SEG_NAME>',
         help=_('Name of the segment.'))
 
     parser.add_argument(

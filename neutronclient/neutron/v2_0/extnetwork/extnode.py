@@ -17,7 +17,7 @@ class ExtNode(extension.NeutronClientExtension):
 
 def add_know_arguments(self, parser):
     parser.add_argument(
-        '--name', dest='name',
+        'name', metavar='<NODE_NAME>',
         help=_('Name of this extnode.'))
 
     parser.add_argument(
