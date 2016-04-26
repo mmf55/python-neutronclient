@@ -15,6 +15,18 @@ class ExtInterface(extension.NeutronClientExtension):
 
 
 def add_known_arguments(self, parser):
+    parser.add_argument(
+        'name', metavar='<INT_NAME>',
+        help=_('Name of the external interface.'))
+
+    parser.add_argument(
+        '--type', dest='type',
+        help=_('Type of the access to the network that this interface implements.'))
+
+    parser.add_argument(
+        '--access-id', dest='access_id',
+        default=argparse.SUPPRESS,
+        help=_('Type of th access to the network that this interface implements.'))
 
     parser.add_argument(
         '--tenant-id', dest='tenant_id',
@@ -22,7 +34,7 @@ def add_known_arguments(self, parser):
         help=_('Tenant network ID for which the interface will be attached.'))
 
     parser.add_argument(
-        '--extnodeint-id', dest='extnodeint_id',
+        '--extnode-id', dest='extnode_id',
         help=_('Interface of the extnode to be attached.'))
 
     parser.add_argument(
@@ -31,8 +43,14 @@ def add_known_arguments(self, parser):
 
 
 def args2body(self, parsed_args):
-    body = {'extnodeint_id': parsed_args.extnode_id,
+    body = {'name': parsed_args.name,
+            'type': parsed_args.type,
+            'extnode_id': parsed_args.extnode_id,
             'network_id': parsed_args.network_id}
+    if 'access_id' in parsed_args:
+        body['access_id'] = parsed_args.access_id
+    else:
+        body['access_id'] = None
     if 'tenant_id' in parsed_args:
         body['tenant_id'] = parsed_args.tenant_id
     return {'extinterface': body}
