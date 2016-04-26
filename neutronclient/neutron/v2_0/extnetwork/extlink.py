@@ -15,7 +15,7 @@ class ExtLink(extension.NeutronClientExtension):
     versions = ['2.0']
 
 
-def add_known_arguments(parser):
+def add_known_arguments_create(parser):
     parser.add_argument(
         '--type', dest='type',
         help=_('Type of overlay network that this clink implements.'))
@@ -32,13 +32,24 @@ def add_known_arguments(parser):
         '--extsegment-id', dest='extsegment_id',
         help=_('Segment \'extsegment\' for this extink to be attached.'))
 
+
+def add_know_arguments_add(parser):
     parser.add_argument(
         '--add-connection',
-        metavar='type=type,extnodeint1=extnodeint1,extnodeint2=extnodeint2,extlink=extlink',
+        metavar='type=type,extnodeint1=extnodeint1,extnodeint2=extnodeint2',
         action='append',
         default=argparse.SUPPRESS,
         dest='add_connections', type=utils.str2dict,
         help=_('Segments where this node has interfaces. '))
+
+
+def add_know_arguments_remove(parser):
+    parser.add_argument(
+        '--remove-connection', metavar='id=id',
+        action='append',
+        default=argparse.SUPPRESS,
+        dest='rem_connections', type=utils.str2dict,
+        help=_('Remove interfaces from the Neutron External network management. '))
 
 
 def args2body(self, parsed_args):
@@ -63,7 +74,8 @@ class ExtLinkCreate(extension.ClientExtensionCreate, ExtLink):
     list_columns = ['id', 'type', 'network_id', 'overlay_id', 'extsegment_id', 'connections']
 
     def add_known_arguments(self, parser):
-        add_known_arguments(parser)
+        add_known_arguments_create(parser)
+        add_know_arguments_add(parser)
 
     def args2body(self, parsed_args):
         return args2body(self, parsed_args)
@@ -79,14 +91,8 @@ class ExtLinkUpdate(extension.ClientExtensionUpdate, ExtLink):
     list_columns = ['id', 'type', 'network_id', 'overlay_id', 'extsegment_id', 'connections']
 
     def add_known_arguments(self, parser):
-        add_known_arguments(parser)
-
-        parser.add_argument(
-            '--remove-connection', metavar='id=id',
-            action='append',
-            default=argparse.SUPPRESS,
-            dest='rem_connections', type=utils.str2dict,
-            help=_('Remove interfaces from the Neutron External network management. '))
+        add_know_arguments_add(parser)
+        add_know_arguments_remove(parser)
 
     def args2body(self, parsed_args):
         args2body(self, parsed_args)

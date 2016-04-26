@@ -63,7 +63,7 @@ class ExtSegmentUpdate(extension.ClientExtensionUpdate, ExtSegment):
         add_know_arguments(self, parser)
 
     def args2body(self, parsed_args):
-        return args2body(parsed_args)
+        return args2body(self, parsed_args)
 
 
 class ExtSegmentList(extension.ClientExtensionList, ExtSegment):
