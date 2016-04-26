@@ -3,6 +3,15 @@ import argparse
 from neutronclient._i18n import _
 from neutronclient.common import extension
 from neutronclient.common import utils
+from oslo_serialization import jsonutils
+
+
+def _format_interfaces(extnode):
+    try:
+        return '\n'.join([jsonutils.dumps(extnode) for extnode in
+                          extnode['interfaces']])
+    except (TypeError, KeyError):
+        return ''
 
 
 class ExtNode(extension.NeutronClientExtension):
@@ -26,7 +35,7 @@ def add_know_arguments(self, parser):
 
     parser.add_argument(
         '--add-interface',
-        metavar='name=name,type=type,segment_id=segment_id',
+        metavar='name=name,segment_id=segment_id',
         action='append',
         default=argparse.SUPPRESS,
         dest='add_interfaces', type=utils.str2dict,
@@ -86,6 +95,7 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
 class ExtNodeList(extension.ClientExtensionList, ExtNode):
 
     shell_command = 'extnode-list'
+    _formatters = {'interfaces': _format_interfaces, }
     list_columns = ['id', 'name', 'type', 'interfaces']
     pagination_support = True
     sorting_support = True
