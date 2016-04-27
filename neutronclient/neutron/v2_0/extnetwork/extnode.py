@@ -24,7 +24,7 @@ class ExtNode(extension.NeutronClientExtension):
     versions = ['2.0']
 
 
-def add_know_arguments(self, parser):
+def add_know_arguments_base(self, parser):
     parser.add_argument(
         'name', metavar='<NODE_NAME>',
         help=_('Name of this extnode.'))
@@ -33,6 +33,8 @@ def add_know_arguments(self, parser):
         '--type', dest='type',
         help=_('External node type. E.g. router, switch, ap.'))
 
+
+def add_know_arguments_add(self, parser):
     parser.add_argument(
         '--add-interface',
         metavar='name=name,segment_id=segment_id',
@@ -40,6 +42,15 @@ def add_know_arguments(self, parser):
         default=argparse.SUPPRESS,
         dest='add_interfaces', type=utils.str2dict,
         help=_('Segments where this node has interfaces. '))
+
+
+def add_know_arguments_remove(self, parser):
+    parser.add_argument(
+        '--remove-interface', metavar='id=id',
+        action='append',
+        default=argparse.SUPPRESS,
+        dest='rem_interfaces', type=utils.str2dict,
+        help=_('Remove interfaces from the Neutron External network management. '))
 
 
 def args2body(self, parsed_args):
@@ -62,7 +73,8 @@ class ExtNodeCreate(extension.ClientExtensionCreate, ExtNode):
     list_columns = ['id', 'name', 'type', 'interfaces']
 
     def add_known_arguments(self, parser):
-        add_know_arguments(self, parser)
+        add_know_arguments_base(self, parser)
+        add_know_arguments_add(self, parser)
 
     def args2body(self, parsed_args):
         return args2body(self, parsed_args)
@@ -79,14 +91,7 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
     list_columns = ['id', 'name', 'type', 'interfaces']
 
     def add_known_arguments(self, parser):
-        add_know_arguments(self, parser)
-
-        parser.add_argument(
-            '--remove-interface', metavar='id=id',
-            action='append',
-            default=argparse.SUPPRESS,
-            dest='rem_interfaces', type=utils.str2dict,
-            help=_('Remove interfaces from the Neutron External network management. '))
+        add_know_arguments_remove(self, parser)
 
     def args2body(self, parsed_args):
         return args2body(self, parsed_args)
