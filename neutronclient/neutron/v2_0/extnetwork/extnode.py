@@ -53,18 +53,26 @@ def add_know_arguments_remove(self, parser):
         help=_('Remove interfaces from the Neutron External network management. '))
 
 
-def args2body(self, parsed_args):
+def args2body_base(self, body, parsed_args):
     body = {'name': parsed_args.name,
             'type': parsed_args.type}
+    return body
+
+
+def args2body_add(self, body, parsed_args):
     if 'add_interfaces' in parsed_args:
         body['add_interfaces'] = parsed_args.add_interfaces
     else:
         body['add_interfaces'] = None
+    return body
+
+
+def args2body_remove(self, body, parsed_args):
     if 'rem_interfaces' in parsed_args:
         body['rem_interfaces'] = parsed_args.rem_interfaces
     else:
         body['rem_interfaces'] = None
-    return {'extnode': body}
+    return body
 
 
 class ExtNodeCreate(extension.ClientExtensionCreate, ExtNode):
@@ -77,7 +85,10 @@ class ExtNodeCreate(extension.ClientExtensionCreate, ExtNode):
         add_know_arguments_add(self, parser)
 
     def args2body(self, parsed_args):
-        return args2body(self, parsed_args)
+        body = {}
+        body = args2body_base(self, body, parsed_args)
+        body = args2body_add(self, body, parsed_args)
+        return {'extnode': body}
 
 
 class ExtNodeDelete(extension.ClientExtensionDelete, ExtNode):
@@ -95,7 +106,10 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
         add_know_arguments_remove(self, parser)
 
     def args2body(self, parsed_args):
-        return args2body(self, parsed_args)
+        body = {}
+        body = args2body_add(self, body, parsed_args)
+        body = args2body_remove(self, body, parsed_args)
+        return {'extnode': body}
 
 
 class ExtNodeList(extension.ClientExtensionList, ExtNode):
