@@ -91,6 +91,7 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNode):
     list_columns = ['id', 'name', 'type', 'interfaces']
 
     def add_known_arguments(self, parser):
+        add_know_arguments_add(self, parser)
         add_know_arguments_remove(self, parser)
 
     def args2body(self, parsed_args):
