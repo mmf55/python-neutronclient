@@ -3,6 +3,15 @@ import argparse
 from neutronclient._i18n import _
 from neutronclient.common import extension
 from neutronclient.common import utils
+from oslo_serialization import jsonutils
+
+
+def _format_interfaces(extlink):
+    try:
+        return '\n'.join([jsonutils.dumps(extlink) for extlink in
+                          extlink['connections']])
+    except (TypeError, KeyError):
+        return ''
 
 
 class ExtLink(extension.NeutronClientExtension):
@@ -100,6 +109,7 @@ class ExtLinkUpdate(extension.ClientExtensionUpdate, ExtLink):
 
 class ExtLinkList(extension.ClientExtensionList, ExtLink):
     shell_command = 'extlink-list'
+    _formatters = {'connections': _format_interfaces, }
     list_columns = ['id', 'type', 'network_id', 'overlay_id', 'extsegment_id', 'connections']
     pagination_support = True
     sorting_support = True
