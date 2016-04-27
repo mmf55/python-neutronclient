@@ -37,7 +37,7 @@ def add_know_arguments_base(self, parser):
 def add_know_arguments_add(self, parser):
     parser.add_argument(
         '--add-interface',
-        metavar='name=name,segment_id=segment_id',
+        metavar='name=name,extsegment_id=extsegment_id',
         action='append',
         default=argparse.SUPPRESS,
         dest='add_interfaces', type=utils.str2dict,
