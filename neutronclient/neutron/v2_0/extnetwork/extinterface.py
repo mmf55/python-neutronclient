@@ -29,11 +29,6 @@ def add_known_arguments(self, parser):
         help=_('Type of th access to the network that this interface implements.'))
 
     parser.add_argument(
-        '--tenant-id', dest='tenant_id',
-        default=argparse.SUPPRESS,
-        help=_('Tenant network ID for which the interface will be attached.'))
-
-    parser.add_argument(
         '--extnode-id', dest='extnode_id',
         help=_('Interface of the extnode to be attached.'))
 
@@ -51,15 +46,13 @@ def args2body(self, parsed_args):
         body['access_id'] = parsed_args.access_id
     else:
         body['access_id'] = None
-    if 'tenant_id' in parsed_args:
-        body['tenant_id'] = parsed_args.tenant_id
     return {'extinterface': body}
 
 
 class ExtInterfaceCreate(extension.ClientExtensionCreate, ExtInterface):
     shell_command = 'extinterface-create'
 
-    list_columns = ['id', 'tenant_id', 'extnodeint_id', 'network_id']
+    list_columns = ['id', 'name', 'type', 'access_id', 'extnode_id', 'network_id', 'tenant_id']
 
     def add_known_arguments(self, parser):
         add_known_arguments(self, parser)
@@ -89,7 +82,7 @@ class ExtInterfacesList(extension.ClientExtensionList, ExtInterface):
 
     shell_command = 'extinterface-list'
 
-    list_columns = ['id', 'type', 'extnode_id', 'network_id']
+    list_columns = ['id', 'name', 'type', 'access_id', 'extnode_id', 'network_id', 'tenant_id']
 
     pagination_support = True
     sorting_support = True
@@ -98,4 +91,4 @@ class ExtInterfacesList(extension.ClientExtensionList, ExtInterface):
 class ExtInterfaceShow(extension.ClientExtensionShow, ExtInterface):
     shell_command = 'extinterface-show'
 
-    list_columns = ['id', 'tenant_id', 'extnodeint_id', 'network_id']
+    list_columns = ['id', 'name', 'type', 'access_id', 'extnode_id', 'network_id', 'tenant_id']
