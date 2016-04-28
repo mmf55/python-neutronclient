@@ -21,12 +21,12 @@ def add_known_arguments(self, parser):
 
     parser.add_argument(
         '--type', dest='type',
-        help=_('Type of the access to the network that this interface implements.'))
+        help=_('Type of the access to the network that this interface implements. (e.g. VLAN, AP)'))
 
     parser.add_argument(
         '--access-id', dest='access_id',
         default=argparse.SUPPRESS,
-        help=_('Type of th access to the network that this interface implements.'))
+        help=_('Type of the access to the network that this interface implements. (e.g. SSID, VLAN ID)'))
 
     parser.add_argument(
         '--extnode-id', dest='extnode_id',
