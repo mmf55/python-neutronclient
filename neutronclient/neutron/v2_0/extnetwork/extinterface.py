@@ -58,7 +58,7 @@ class ExtInterfaceCreate(extension.ClientExtensionCreate, ExtInterface):
         add_known_arguments(self, parser)
 
     def args2body(self, parsed_args):
-        args2body(self, parsed_args)
+        return args2body(self, parsed_args)
 
 
 class ExtInterfaceDelete(extension.ClientExtensionDelete, ExtInterface):
@@ -74,7 +74,7 @@ class ExtInterfaceUpdate(extension.ClientExtensionUpdate, ExtInterface):
         add_known_arguments(self, parser)
 
     def args2body(self, parsed_args):
-        args2body(self, parsed_args)
+        return args2body(self, parsed_args)
 
 
 class ExtInterfacesList(extension.ClientExtensionList, ExtInterface):
