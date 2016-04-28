@@ -42,10 +42,6 @@ def args2body(self, parsed_args):
             'type': parsed_args.type,
             'extnode_id': parsed_args.extnode_id,
             'network_id': parsed_args.network_id}
-    if 'access_id' in parsed_args:
-        body['access_id'] = parsed_args.access_id
-    else:
-        body['access_id'] = None
     return {'extinterface': body}
 
 
@@ -68,7 +64,7 @@ class ExtInterfaceDelete(extension.ClientExtensionDelete, ExtInterface):
 class ExtInterfaceUpdate(extension.ClientExtensionUpdate, ExtInterface):
     shell_command = 'extinterface-update'
 
-    list_columns = ['id', 'tenant_id', 'extnodeint_id', 'network_id']
+    list_columns = ['id', 'name', 'type', 'access_id', 'extnode_id', 'network_id', 'tenant_id']
 
     def add_known_arguments(self, parser):
         add_known_arguments(self, parser)
