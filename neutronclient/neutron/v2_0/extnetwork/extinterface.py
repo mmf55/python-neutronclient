@@ -42,6 +42,10 @@ def args2body(self, parsed_args):
             'type': parsed_args.type,
             'extnode_id': parsed_args.extnode_id,
             'network_id': parsed_args.network_id}
+    if 'access_id' in parsed_args:
+        body['access_id'] = parsed_args.access_id
+    else:
+        body['access_id'] = None
     return {'extinterface': body}
 
 
