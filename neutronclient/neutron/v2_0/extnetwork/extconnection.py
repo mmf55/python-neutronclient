@@ -37,10 +37,8 @@ def add_know_arguments_updatable(self, parser):
         help=_('Pool of IDs available to use in the segment. (xxxx:xxxx or xxxxx)'))
 
 
-def args2body(self, parsed_args):
-    body = {'extnodeint1_id': parsed_args.types_supported,
-            'extnodeint2_id': parsed_args.ids_pool}
-    return body
+def args2body(self, body, parsed_args):
+    neutronV20.update_dict(parsed_args, body, ['extnodeint1_id', 'extnodeint2_id'])
 
 
 def updatable_args2body(self, body, parsed_args):
@@ -57,7 +55,8 @@ class ExtConnectionCreate(extension.ClientExtensionCreate, ExtConnection):
         add_know_arguments_updatable(self, parser)
 
     def args2body(self, parsed_args):
-        body = args2body(self, parsed_args)
+        body = {}
+        args2body(self, body, parsed_args)
         updatable_args2body(self, body, parsed_args)
         return {'extconnection': body}
 
