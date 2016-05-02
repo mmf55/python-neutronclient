@@ -24,6 +24,7 @@ from neutronclient.common import utils
 from neutronclient.neutron import v2_0 as neutronV20
 from neutronclient.neutron.v2_0 import dns
 from neutronclient.neutron.v2_0.qos import policy as qos_policy
+from neutronclient.neutron.v2_0.extnetwork import extport
 
 
 def _format_fixed_ips(port):
@@ -222,7 +223,7 @@ class UpdatePortAllowedAddressPair(object):
 
 class CreatePort(neutronV20.CreateCommand, UpdatePortSecGroupMixin,
                  UpdateExtraDhcpOptMixin, qos_policy.CreateQosPolicyMixin,
-                 UpdatePortAllowedAddressPair):
+                 UpdatePortAllowedAddressPair, extport.UpdatePortToExtPortMixin):
     """Create a port for a given tenant."""
 
     resource = 'port'
@@ -265,6 +266,7 @@ class CreatePort(neutronV20.CreateCommand, UpdatePortSecGroupMixin,
         self.add_arguments_extradhcpopt(parser)
         self.add_arguments_qos_policy(parser)
         self.add_arguments_allowedaddresspairs(parser)
+        self.add_arguments_extport(parser)
 
         parser.add_argument(
             'network_id', metavar='NETWORK',
@@ -291,6 +293,7 @@ class CreatePort(neutronV20.CreateCommand, UpdatePortSecGroupMixin,
         self.args2body_qos_policy(parsed_args, body)
         self.args2body_allowedaddresspairs(parsed_args, body)
         dns.args2body_dns_create(parsed_args, body, 'name')
+        self.args2body_extport(parsed_args, body)
 
         return {'port': body}
 
@@ -303,7 +306,7 @@ class DeletePort(neutronV20.DeleteCommand):
 
 class UpdatePort(neutronV20.UpdateCommand, UpdatePortSecGroupMixin,
                  UpdateExtraDhcpOptMixin, qos_policy.UpdateQosPolicyMixin,
-                 UpdatePortAllowedAddressPair):
+                 UpdatePortAllowedAddressPair, extport.UpdatePortToExtPortMixin):
     """Update port's information."""
 
     resource = 'port'
@@ -323,6 +326,7 @@ class UpdatePort(neutronV20.UpdateCommand, UpdatePortSecGroupMixin,
         self.add_arguments_qos_policy(parser)
         self.add_arguments_allowedaddresspairs(parser)
         dns.add_dns_argument_update(parser, self.resource, 'name')
+        self.add_arguments_extport(parser)
 
     def args2body(self, parsed_args):
         body = {}
@@ -336,5 +340,6 @@ class UpdatePort(neutronV20.UpdateCommand, UpdatePortSecGroupMixin,
         self.args2body_qos_policy(parsed_args, body)
         self.args2body_allowedaddresspairs(parsed_args, body)
         dns.args2body_dns_update(parsed_args, body, 'name')
+        self.args2body_extport(parsed_args, body)
 
         return {'port': body}
