@@ -53,16 +53,16 @@ class ExtNodeIntCreate(extension.ClientExtensionCreate, ExtNodeInt):
         body = {}
         args2body(self, body, parsed_args)
         args2body_updatable(self, body, parsed_args)
-        return {'extnode': body}
+        return {'extnodeint': body}
 
 
 class ExtNodeDelete(extension.ClientExtensionDelete, ExtNodeInt):
 
-    shell_command = 'extnode-delete'
+    shell_command = 'extnodeint-delete'
 
 
 class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNodeInt):
-    shell_command = 'extnode-update'
+    shell_command = 'extnodeint-update'
 
     list_columns = ['id', 'name', 'type', 'extnodename']
 
@@ -72,12 +72,12 @@ class ExtNodeUpdate(extension.ClientExtensionUpdate, ExtNodeInt):
     def args2body(self, parsed_args):
         body = {}
         args2body_updatable(self, body, parsed_args)
-        return {'extnode': body}
+        return {'extnodeint': body}
 
 
 class ExtNodeList(extension.ClientExtensionList, ExtNodeInt):
 
-    shell_command = 'extnode-list'
+    shell_command = 'extnodeint-list'
     list_columns = ['id', 'name', 'type', 'extnodename']
     pagination_support = True
     sorting_support = True
@@ -85,6 +85,6 @@ class ExtNodeList(extension.ClientExtensionList, ExtNodeInt):
 
 class ExtNodeShow(extension.ClientExtensionShow, ExtNodeInt):
 
-    shell_command = 'extnode-show'
+    shell_command = 'extnodeint-show'
 
 
