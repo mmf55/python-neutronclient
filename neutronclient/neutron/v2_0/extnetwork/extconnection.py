@@ -19,11 +19,11 @@ class ExtConnection(extension.NeutronClientExtension):
 
 def add_know_arguments(self, parser):
     parser.add_argument(
-        '--extnodeint1', dest='extnodeint1',
+        '--extnodeint1-id', dest='extnodeint1_id',
         help=_('1st end of the connection'))
 
     parser.add_argument(
-        '--extnodeint2', dest='extnodeint1',
+        '--extnodeint2-id', dest='extnodeint2_id',
         help=_('2nd end of the connection'))
 
 
@@ -50,7 +50,7 @@ def updatable_args2body(self, body, parsed_args):
 class ExtConnectionCreate(extension.ClientExtensionCreate, ExtConnection):
 
     shell_command = 'extconnection-create'
-    list_columns = ['id', 'types_supported', 'ids_pool', 'extnodeint1', 'extnodeint2']
+    list_columns = ['id', 'types_supported', 'ids_pool', 'extnodeint1_id', 'extnodeint2_id']
 
     def add_known_arguments(self, parser):
         add_know_arguments(self, parser)
@@ -70,7 +70,7 @@ class ExtConnectionDelete(extension.ClientExtensionDelete, ExtConnection):
 class ExtConnectionUpdate(extension.ClientExtensionUpdate, ExtConnection):
 
     shell_command = 'extconnection-update'
-    list_columns = ['id', 'types_supported', 'ids_pool', 'extnodeint1', 'extnodeint2']
+    list_columns = ['id', 'types_supported', 'ids_pool', 'extnodeint1_id', 'extnodeint2_id']
 
     def add_known_arguments(self, parser):
         add_know_arguments_updatable(self, parser)
@@ -84,7 +84,7 @@ class ExtConnectionUpdate(extension.ClientExtensionUpdate, ExtConnection):
 class ExtConnectionList(extension.ClientExtensionList, ExtConnection):
 
     shell_command = 'extconnection-list'
-    list_columns = ['id', 'types_supported', 'ids_pool', 'extnodeint1', 'extnodeint2']
+    list_columns = ['id', 'types_supported', 'ids_pool', 'extnodeint1_id', 'extnodeint2_id']
     pagination_support = True
     sorting_support = True
 
