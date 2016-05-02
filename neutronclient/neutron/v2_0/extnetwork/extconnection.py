@@ -38,8 +38,8 @@ def add_know_arguments_updatable(self, parser):
 
 
 def args2body(self, parsed_args):
-    body = {'types_supported': parsed_args.types_supported,
-            'ids_pool': parsed_args.ids_pool}
+    body = {'extnodeint1_id': parsed_args.types_supported,
+            'extnodeint2_id': parsed_args.ids_pool}
     return body
 
 
