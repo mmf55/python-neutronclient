@@ -11,7 +11,7 @@ class UpdatePortToExtPortMixin(object):
     def add_arguments_extport(self, parser):
         parser.add_argument(
             '--external-port',
-            metavar='access_id=access_id,extnodeint_id=extnodeint_id',
+            metavar='name=name,segmentation_id=segmentation_id,extinterface_id=extinterface_id',
             action='append',
             default=argparse.SUPPRESS,
             dest='external_port', type=utils.str2dict,
