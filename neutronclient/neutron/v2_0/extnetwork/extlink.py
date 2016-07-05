@@ -22,10 +22,6 @@ def add_known_arguments(parser):
         help=_('Type of overlay network that this clink implements.'))
 
     parser.add_argument(
-        '--segmentation_id', dest='segmentation_id',
-        help=_('Segmentation ID of this link.'))
-
-    parser.add_argument(
         '--extinterface1-id', dest='extinterface1_id',
         help=_('First endpoint of the \'extlink\'.'))
 
@@ -46,7 +42,6 @@ def add_know_arguments_updatable(parser):
 
 def args2body(body, parsed_args):
     neutronV20.update_dict(parsed_args, body, ['type',
-                                               'segmentation_id',
                                                'extinterface1_id',
                                                'extinterface2_id',
                                                'network_id'])
@@ -62,7 +57,6 @@ class ExtLinkCreate(extension.ClientExtensionCreate, ExtLink):
     list_columns = ['id',
                     'name',
                     'type',
-                    'segmentation_id',
                     'extinterface1_id',
                     'extinterface2_id',
                     'network_id']
@@ -88,7 +82,6 @@ class ExtLinkUpdate(extension.ClientExtensionUpdate, ExtLink):
     list_columns = ['id',
                     'name',
                     'type',
-                    'segmentation_id',
                     'extinterface1_id',
                     'extinterface2_id',
                     'network_id']
@@ -107,7 +100,6 @@ class ExtLinkList(extension.ClientExtensionList, ExtLink):
     list_columns = ['id',
                     'name',
                     'type',
-                    'segmentation_id',
                     'extinterface1_id',
                     'extinterface2_id',
                     'network_id']
