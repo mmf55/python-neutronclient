@@ -36,7 +36,7 @@ def add_known_arguments(parser):
 
 def add_know_arguments_updatable(parser):
     parser.add_argument(
-        '--name', dest='name',
+        'name', metavar='<LINK_NAME>',
         help=_('Name of this external link.'))
 
 
