@@ -25,12 +25,8 @@ def add_know_arguments(parser):
         help=_('The ip address already attributed to this interface'))
 
     parser.add_argument(
-        '--node-name', dest='node_name',
-        help=_('External node name.'))
-
-    parser.add_argument(
-        '--node-driver', dest='node_driver',
-        help=_('External node driver.'))
+        '--extnode-id', dest='extnode_id',
+        help=_('External node ID.'))
 
     parser.add_argument(
         '--extsegment-id', dest='extsegment_id',
@@ -47,8 +43,7 @@ def args2body(body, parsed_args):
     neutronV20.update_dict(parsed_args, body, ['type',
                                                'ip_address',
                                                'extsegment_id',
-                                               'node_name',
-                                               'node_driver'])
+                                               'extnode_id'])
 
 
 def args2body_updatable(body, parsed_args):
@@ -58,7 +53,7 @@ def args2body_updatable(body, parsed_args):
 class ExtInterfaceCreate(extension.ClientExtensionCreate, ExtInterface):
     shell_command = 'extinterface-create'
 
-    list_columns = ['id', 'name', 'type', 'ip_address', 'extsegment_id', 'node_name', 'node_driver']
+    list_columns = ['id', 'name', 'type', 'ip_address', 'extsegment_id', 'extnode_id']
 
     def add_known_arguments(self, parser):
         add_know_arguments(parser)
@@ -79,7 +74,7 @@ class ExtInterfaceDelete(extension.ClientExtensionDelete, ExtInterface):
 class ExtInterfaceUpdate(extension.ClientExtensionUpdate, ExtInterface):
     shell_command = 'extinterface-update'
 
-    list_columns = ['id', 'name', 'type', 'ip_address', 'extsegment_id', 'node_name', 'node_driver']
+    list_columns = ['id', 'name', 'type', 'ip_address', 'extsegment_id', 'extnode_id']
 
     def add_known_arguments(self, parser):
         add_know_arguments_updatable(parser)
@@ -93,7 +88,7 @@ class ExtInterfaceUpdate(extension.ClientExtensionUpdate, ExtInterface):
 class ExtInterfaceList(extension.ClientExtensionList, ExtInterface):
     shell_command = 'extinterface-list'
 
-    list_columns = ['id', 'name', 'type', 'ip_address', 'extsegment_id', 'node_name', 'node_driver']
+    list_columns = ['id', 'name', 'type', 'ip_address', 'extsegment_id', 'extnode_id']
     pagination_support = True
     sorting_support = True
 
