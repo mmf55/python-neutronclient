@@ -28,15 +28,15 @@ def add_know_arguments(parser):
         '--extnode-id', dest='extnode_id',
         help=_('External node ID.'))
 
-    parser.add_argument(
-        '--extsegment-id', dest='extsegment_id',
-        help=_('Segment \'extsegment\' for which this interface belongs.'))
-
 
 def add_know_arguments_updatable(parser):
     parser.add_argument(
         'name', metavar='<INTERFACE_NAME>',
         help=_('Name of this external node interface.'))
+
+    parser.add_argument(
+        '--extsegment-id', dest='extsegment_id',
+        help=_('Segment \'extsegment\' for which this interface belongs.'))
 
 
 def args2body(body, parsed_args):
