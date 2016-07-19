@@ -24,6 +24,7 @@ def add_know_arguments(parser):
 
     parser.add_argument(
         '--topology-discover', dest='topology_discover',
+        action='store_true',
         help=_('Run the topology discover.'))
 
 
