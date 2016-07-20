@@ -41,7 +41,8 @@ def add_know_arguments_updatable(parser):
 
 
 def args2body(body, parsed_args):
-    neutronV20.update_dict(parsed_args, body, ['type',
+    neutronV20.update_dict(parsed_args, body, ['name',
+                                               'type',
                                                'ip_address',
                                                'extsegment_id',
                                                'extnode_id'])
