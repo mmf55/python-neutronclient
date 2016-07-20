@@ -17,6 +17,10 @@ class ExtInterface(extension.NeutronClientExtension):
 
 def add_know_arguments(parser):
     parser.add_argument(
+        'name', metavar='<INTERFACE_NAME>',
+        help=_('Name of this external node interface.'))
+
+    parser.add_argument(
         '--type', dest='type',
         help=_('External node interface type. E.g. l2 or l3.'))
 
