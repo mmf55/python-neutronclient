@@ -30,9 +30,6 @@ def add_know_arguments(parser):
 
 
 def add_know_arguments_updatable(parser):
-    parser.add_argument(
-        'name', metavar='<INTERFACE_NAME>',
-        help=_('Name of this external node interface.'))
 
     parser.add_argument(
         '--extsegment-id', dest='extsegment_id',
