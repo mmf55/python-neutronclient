@@ -44,7 +44,7 @@ def args2body(body, parsed_args):
 
 
 def args2body_updatable(body, parsed_args):
-    neutronV20.update_dict(parsed_args, body, ['name'])
+    neutronV20.update_dict(parsed_args, body, ['extsegment_id'])
 
 
 class ExtInterfaceCreate(extension.ClientExtensionCreate, ExtInterface):
