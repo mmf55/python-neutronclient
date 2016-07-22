@@ -25,15 +25,15 @@ def add_know_arguments(parser):
         help=_('External node interface type. E.g. l2 or l3.'))
 
     parser.add_argument(
-        '--ip-address', dest='ip_address',
-        help=_('The ip address already attributed to this interface'))
-
-    parser.add_argument(
         '--extnode-id', dest='extnode_id',
         help=_('External node ID.'))
 
 
 def add_know_arguments_updatable(parser):
+
+    parser.add_argument(
+        '--ip-address', dest='ip_address',
+        help=_('The ip address already attributed to this interface'))
 
     parser.add_argument(
         '--extsegment-id', dest='extsegment_id',
@@ -43,13 +43,12 @@ def add_know_arguments_updatable(parser):
 def args2body(body, parsed_args):
     neutronV20.update_dict(parsed_args, body, ['name',
                                                'type',
-                                               'ip_address',
-                                               'extsegment_id',
                                                'extnode_id'])
 
 
 def args2body_updatable(body, parsed_args):
-    neutronV20.update_dict(parsed_args, body, ['extsegment_id'])
+    neutronV20.update_dict(parsed_args, body, ['extsegment_id',
+                                               'ip_address'])
 
 
 class ExtInterfaceCreate(extension.ClientExtensionCreate, ExtInterface):
