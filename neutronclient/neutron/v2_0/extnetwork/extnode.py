@@ -38,7 +38,7 @@ def args2body(body, parsed_args):
 class ExtNodeCreate(extension.ClientExtensionCreate, ExtNode):
     shell_command = 'extnode-create'
 
-    list_columns = ['id', 'name', 'ip_address', 'info']
+    list_columns = ['id', 'name', 'ip_address', 'topology_discover_info']
 
     def add_known_arguments(self, parser):
         add_know_arguments(parser)
