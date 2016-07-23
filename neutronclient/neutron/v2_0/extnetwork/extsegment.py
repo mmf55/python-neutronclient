@@ -23,23 +23,18 @@ def add_know_arguments(self, parser):
         help=_('Name of this external segment.'))
 
     parser.add_argument(
-        '--types-supported', dest='types_supported',
+        '--type-supported', dest='type_supported',
         help=_('Types of overlay networks that this external connection supports.'))
 
     parser.add_argument(
-        '--vlan-ids-available', dest='vlan_ids_available',
+        '--ids-available', dest='ids_available',
         help=_('Pool of VLAN IDs available to use in the segment. (xxxx:xxxx or xxxxx)'))
-
-    parser.add_argument(
-        '--tun-ids-available', dest='tun_ids_available',
-        help=_('Pool of Tunnel IDs available to use in the segment. (xxxx:xxxx or xxxxx)'))
 
 
 def args2body(parsed_args):
     body = {'name': parsed_args.name,
-            'types_supported': parsed_args.types_supported,
-            'vlan_ids_available': parsed_args.vlan_ids_available,
-            'tun_ids_available': parsed_args.tun_ids_available
+            'type_supported': parsed_args.type_supported,
+            'ids_available': parsed_args.ids_available,
             }
     return body
 
@@ -50,9 +45,8 @@ class ExtConnectionCreate(extension.ClientExtensionCreate, ExtSegment):
 
     list_columns = ['id',
                     'name',
-                    'types_supported',
-                    'vlan_ids_available',
-                    'tun_ids_available',
+                    'type_supported',
+                    'ids_available',
                     ]
 
     def add_known_arguments(self, parser):
@@ -71,7 +65,7 @@ class ExtConnectionDelete(extension.ClientExtensionDelete, ExtSegment):
 class ExtConnectionUpdate(extension.ClientExtensionUpdate, ExtSegment):
 
     shell_command = 'extsegment-update'
-    list_columns = ['id', 'name', 'types_supported', 'vlan_ids_available', 'tun_ids_available']
+    list_columns = ['id', 'name', 'type_supported', 'ids_available']
 
     def add_known_arguments(self, parser):
         add_know_arguments(self, parser)
@@ -84,7 +78,7 @@ class ExtConnectionUpdate(extension.ClientExtensionUpdate, ExtSegment):
 class ExtConnectionList(extension.ClientExtensionList, ExtSegment):
 
     shell_command = 'extsegment-list'
-    list_columns = ['id', 'name', 'types_supported', 'vlan_ids_available', 'tun_ids_available']
+    list_columns = ['id', 'name', 'type_supported', 'ids_available']
     pagination_support = True
     sorting_support = True
 
