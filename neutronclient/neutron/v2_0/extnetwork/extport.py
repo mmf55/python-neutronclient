@@ -13,7 +13,7 @@ class UpdatePortToExtPortMixin(object):
             '--extinterface-id',
             default=argparse.SUPPRESS,
             dest='extinterface_id',
-            help=_('Set this port to be an external port.'))
+            help=_('Set this port to be an external port by defining the external interface that it will be attached.'))
 
     def args2body_extport(self, parsed_args, body):
         neutronV20.update_dict(parsed_args, body, ['extinterface_id'])
