@@ -18,10 +18,6 @@ class ExtLink(extension.NeutronClientExtension):
 def add_known_arguments(parser):
 
     parser.add_argument(
-        '--type', dest='type',
-        help=_('Type of overlay network that this clink implements.'))
-
-    parser.add_argument(
         '--extinterface1-id', dest='extinterface1_id',
         help=_('First endpoint of the \'extlink\'.'))
 
@@ -41,8 +37,7 @@ def add_know_arguments_updatable(parser):
 
 
 def args2body(body, parsed_args):
-    neutronV20.update_dict(parsed_args, body, ['type',
-                                               'extinterface1_id',
+    neutronV20.update_dict(parsed_args, body, ['extinterface1_id',
                                                'extinterface2_id',
                                                'network_id'])
 
@@ -56,7 +51,6 @@ class ExtLinkCreate(extension.ClientExtensionCreate, ExtLink):
 
     list_columns = ['id',
                     'name',
-                    'type',
                     'extinterface1_id',
                     'extinterface2_id',
                     'network_id']
@@ -81,7 +75,6 @@ class ExtLinkUpdate(extension.ClientExtensionUpdate, ExtLink):
 
     list_columns = ['id',
                     'name',
-                    'type',
                     'extinterface1_id',
                     'extinterface2_id',
                     'network_id']
@@ -99,7 +92,6 @@ class ExtLinkList(extension.ClientExtensionList, ExtLink):
     shell_command = 'extlink-list'
     list_columns = ['id',
                     'name',
-                    'type',
                     'extinterface1_id',
                     'extinterface2_id',
                     'network_id']
