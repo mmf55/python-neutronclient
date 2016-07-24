@@ -23,7 +23,7 @@ def add_know_arguments(parser):
         help=_('The ip address of the management interface.'))
 
     parser.add_argument(
-        '--topology-discover', dest='topology_discover',
+        '--topology-discovery', dest='topology_discovery',
         action='store_true',
         help=_('Run the topology discover.'))
 
@@ -38,7 +38,7 @@ def args2body(body, parsed_args):
 class ExtNodeCreate(extension.ClientExtensionCreate, ExtNode):
     shell_command = 'extnode-create'
 
-    list_columns = ['id', 'name', 'ip_address', 'topology_discover_info']
+    list_columns = ['id', 'name', 'ip_address', 'topology_discovery_info']
 
     def add_known_arguments(self, parser):
         add_know_arguments(parser)
