@@ -31,7 +31,7 @@ def add_know_arguments(parser):
 def args2body(body, parsed_args):
     neutronV20.update_dict(parsed_args, body, ['name',
                                                'ip_address',
-                                               'topology_discover',
+                                               'topology_discovery',
                                                ])
 
 
