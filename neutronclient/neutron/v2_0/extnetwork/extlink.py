@@ -51,6 +51,7 @@ class ExtLinkCreate(extension.ClientExtensionCreate, ExtLink):
 
     list_columns = ['id',
                     'name',
+                    'segmentation_id',
                     'extinterface1_id',
                     'extinterface2_id',
                     'network_id']
@@ -75,6 +76,7 @@ class ExtLinkUpdate(extension.ClientExtensionUpdate, ExtLink):
 
     list_columns = ['id',
                     'name',
+                    'segmentation_id',
                     'extinterface1_id',
                     'extinterface2_id',
                     'network_id']
@@ -92,6 +94,7 @@ class ExtLinkList(extension.ClientExtensionList, ExtLink):
     shell_command = 'extlink-list'
     list_columns = ['id',
                     'name',
+                    'segmentation_id',
                     'extinterface1_id',
                     'extinterface2_id',
                     'network_id']
