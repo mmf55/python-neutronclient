@@ -16,9 +16,9 @@ class UpdatePortToExtPortMixin(object):
             help=_('Used if is desired one specific external port on the requested node.'))
 
         parser.add_argument(
-            '--extinterface-name',
+            '--extnode-name',
             default=argparse.SUPPRESS,
-            dest='extinterface_name',
+            dest='extnode_name',
             help=_('External node name of the node which the port will be placed'))
 
     def args2body_extport(self, parsed_args, body):
