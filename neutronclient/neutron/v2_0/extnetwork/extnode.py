@@ -22,23 +22,17 @@ def add_know_arguments(parser):
         '--ip-address', dest='ip_address',
         help=_('The ip address of the management interface.'))
 
-    parser.add_argument(
-        '--topology-discovery', dest='topology_discovery',
-        action='store_true',
-        help=_('Run the topology discover.'))
-
 
 def args2body(body, parsed_args):
     neutronV20.update_dict(parsed_args, body, ['name',
                                                'ip_address',
-                                               'topology_discovery',
                                                ])
 
 
 class ExtNodeCreate(extension.ClientExtensionCreate, ExtNode):
     shell_command = 'extnode-create'
 
-    list_columns = ['id', 'name', 'ip_address', 'topology_discovery_info']
+    list_columns = ['id', 'name', 'ip_address']
 
     def add_known_arguments(self, parser):
         add_know_arguments(parser)
